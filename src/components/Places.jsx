@@ -2,9 +2,9 @@ export default function Places({
   title,
   places,
   fallbackText,
-  loadingText,
   onSelectPlace,
   isLoading,
+  loadingText,
 }) {
   console.log(places);
   return (

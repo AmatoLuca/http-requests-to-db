@@ -1,4 +1,4 @@
-export const fetchAvailablePlaces = async () => {
+export async function fetchAvailablePlaces() {
   const response = await fetch('http://localhost:3000/places');
   const resData = await response.json();
 
@@ -7,18 +7,28 @@ export const fetchAvailablePlaces = async () => {
   }
 
   return resData.places;
-};
+}
 
-export const updateUserPlaces = async (places) => {
-  const options = {
+export async function fetchUserPlaces() {
+  const response = await fetch('http://localhost:3000/user-places');
+  const resData = await response.json();
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch user places');
+  }
+
+  return resData.places;
+}
+
+export async function updateUserPlaces(places) {
+  const response = await fetch('http://localhost:3000/user-places', {
     method: 'PUT',
     body: JSON.stringify({ places }),
     headers: {
       'Content-Type': 'application/json',
     },
-  };
+  });
 
-  const response = await fetch('http://localhost:3000/user-places', options);
   const resData = await response.json();
 
   if (!response.ok) {
@@ -26,4 +36,4 @@ export const updateUserPlaces = async (places) => {
   }
 
   return resData.message;
-};
+}
